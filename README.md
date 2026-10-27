@@ -1,8 +1,8 @@
 # SlideMage plugin template
 
-A starting point for a [SlideMage](https://stpalan.github.io/slidemage-website/) plugin. It has the layout,
+A starting point for a [SlideMage](https://slidemage.org/) plugin. It has the layout,
 the build and the release workflow the plugin catalogue expects; the
-[conventions](https://stpalan.github.io/slidemage-website/plugins/submit/) explain each rule.
+[conventions](https://slidemage.org/plugins/submit/) explain each rule.
 
 > SlideMage doesn't load plugins yet. The plugin API (`slidemage.plugin_api`) will be documented with the
 > first SlideMage release that supports plugins.
@@ -25,7 +25,7 @@ the build and the release workflow the plugin catalogue expects; the
 7. Start `CHANGELOG.md` with your first version, and check that the license (`LICENSE`, GPL-3.0-or-later
    here) is the one you want; it must be GPL-compatible.
 
-Then release (below) and [submit the plugin](https://stpalan.github.io/slidemage-website/plugins/submit/).
+Then release (below) and [submit the plugin](https://slidemage.org/plugins/submit/).
 
 ## Development
 
