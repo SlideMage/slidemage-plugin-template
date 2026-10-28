@@ -21,6 +21,9 @@ ROOT = Path(__file__).parent
 FIXED_TIME = (1980, 1, 1, 0, 0, 0)  # same bytes for the same files, so a rebuild gives the same hash
 
 ID_RE = re.compile(r"^[a-z][a-z0-9-]{1,31}$")
+# Taken: "submit" by the website's /plugins/submit/, the rest by SlideMage's own files next to installed plugins.
+RESERVED_IDS = {"submit", "settings", "secrets", "pending", "staging", "old", "state", "catalogue",
+                "last-update-check", "offer-seen", "migrations-seen"}
 VERSION_RE = re.compile(r"^\d+\.\d+\.\d+$")
 RANGE_RE = re.compile(r"^(>=|<=|==|<|>)\s*\d+(\.\d+){0,2}(\s*,\s*(>=|<=|==|<|>)\s*\d+(\.\d+){0,2})*$")
 ENTRY_RE = re.compile(r"^v(\d+\.\d+\.\d+) \([^)]*\):\s*\S")
@@ -50,6 +53,8 @@ def check_manifest(meta):
 
     if not isinstance(meta.get("id"), str) or not ID_RE.match(meta["id"]):
         problems.append("plugin.toml: id must be 2-32 lowercase letters, digits or hyphens, starting with a letter")
+    elif meta["id"] in RESERVED_IDS:
+        problems.append(f"plugin.toml: the id {meta['id']!r} is taken; choose another")
     if not isinstance(meta.get("version"), str) or not VERSION_RE.match(meta["version"]):
         problems.append("plugin.toml: version must be MAJOR.MINOR.PATCH")
     text("name", 40)
