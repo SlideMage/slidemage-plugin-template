@@ -2,7 +2,7 @@ id = "example"
 name = "Example"
 version = "0.1.0"
 api_version = 1
-requires_slidemage = ">=9.0"
+requires_slidemage = ">=0.14.36"
 summary = "One sentence on what the plugin does, at most 120 characters."
 author = "Your Name"
 homepage = "https://github.com/OWNER/slidemage-plugin-example"
