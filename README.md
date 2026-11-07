@@ -36,6 +36,9 @@ and its `activate(host)`, the imports, no compiled files, and a `CHANGELOG.md` e
 `python build.py` checks and then builds `dist/<id>-<version>.smplugin` (a zip of `plugin.toml`, `LICENSE`
 and the package) and its `.sha256`. The build is reproducible: the same files always give the same hash.
 
+`tests/test_smoke.py` loads the plugin through SlideMage's own loader. Run it against a SlideMage checkout:
+`PYTHONPATH=<SlideMage>/src:. python -m pytest -q`. Add your own tests beside it.
+
 ### Logging
 
 `host.log(message, level="info")` writes to SlideMage's own log, under the area `plugins.<id>`; `level` is
