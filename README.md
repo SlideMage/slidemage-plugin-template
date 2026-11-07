@@ -39,6 +39,28 @@ and the package) and its `.sha256`. The build is reproducible: the same files al
 `tests/test_smoke.py` loads the plugin through SlideMage's own loader. Run it against a SlideMage checkout:
 `PYTHONPATH=<SlideMage>/src:. python -m pytest -q`. Add your own tests beside it.
 
+### Looking like SlideMage
+
+Build your UI from the host's widgets (`host.Card`, `host.Chip(..., mono=True)`, `host.Label`,
+`host.IconButton(..., faint=True)` with `set_faint`); they follow the app's theme by themselves. For
+anything you style or paint yourself, read the values from `host.theme()` rather than writing numbers:
+
+```python
+t = host.theme()
+layout.setContentsMargins(t.space_xl, t.space_xl, t.space_xl, t.space_xl)
+layout.setSpacing(t.space_md)
+title.setStyleSheet(f"QLabel#myTitle {{ font-size: {t.font_heading}px; color: {t.text}; }}")
+button.setIcon(host.icon("refresh", t.text_2))
+dot_color = t.accents["teal"]          # categories; red and amber mean error and warning
+host.on_theme_changed(lambda tokens: restyle(tokens))   # repaint when the user switches light/dark
+```
+
+Style only your own object names (`setObjectName("myTitle")`); SlideMage's internal ones are not API.
+These need `requires_slidemage = ">=0.14.36"`. SlideMage's plugin guide (`docs/PLUGIN_GUIDE.md`) has the
+full list.
+See the [SlideMage design handbook](https://github.com/SlideMage/SlideMage/tree/develop/docs/design-handbook) for
+colour roles, scales and themed widget examples.
+
 ### Logging
 
 `host.log(message, level="info")` writes to SlideMage's own log, under the area `plugins.<id>`; `level` is
